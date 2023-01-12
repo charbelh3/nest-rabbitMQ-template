@@ -3,9 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './components/user/user.module';
-import config from './config/env.config';
-import { LoggingMiddlewareService } from './helpers/logging-middleware/logging-middleware.service';
+import { UserModule } from './user/user.module';
+import config from './config/config';
+import { CustomWinstonLogger } from './helpers/logger.service';
+import { LoggingMiddlewareService } from './middlewares/logging-middleware.service';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { LoggingMiddlewareService } from './helpers/logging-middleware/logging-m
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, LoggingMiddlewareService],
+  providers: [AppService, LoggingMiddlewareService, CustomWinstonLogger],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

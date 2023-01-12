@@ -4,7 +4,7 @@ import * as winston from 'winston';
 import * as correlation from 'express-correlation-id';
 
 @Injectable()
-export class WinstonLogger implements LoggerService {
+export class CustomWinstonLogger implements LoggerService {
   private logger: winston.Logger;
   private logTransform = (info: winston.Logform.TransformableInfo): string => {
     const { level, message, timestamp, correlationId } = info;
@@ -14,10 +14,11 @@ export class WinstonLogger implements LoggerService {
   constructor(private configService: ConfigService) {
     this.logger = winston.createLogger({
       level:
-        this.configService.get<string>('NODE_ENV') === 'environment'
+        this.configService.get<string>('NODE_ENV') === 'development'
           ? 'debug'
           : 'info',
       format: winston.format.combine(
+        winston.format.colorize(),
         winston.format((info) => {
           info.correlationId = correlation.getId();
           return info;
