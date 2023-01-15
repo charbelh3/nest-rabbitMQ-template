@@ -9,7 +9,7 @@ import {
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { JoiValidationPipe } from 'src/pipes/validation.pipe';
-import schema from './user.schema';
+import schema from './user.validation';
 
 @Controller('users')
 export class UserController {
@@ -17,8 +17,7 @@ export class UserController {
 
   @Post('')
   @UsePipes(new JoiValidationPipe(schema.createUser))
-  async createUser(@Body() user: any): Promise<UserDto> {
-    console.log(user);
+  async createUser(@Body() user: any): Promise<any> {
     return this.userService.createUser(user);
   }
 
