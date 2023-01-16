@@ -1,5 +1,6 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, Global } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt/dist';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -21,6 +22,7 @@ import { LoggingMiddlewareService } from './helpers/logging-middleware/logging-m
       }),
       inject: [ConfigService],
     }),
+    JwtModule.register({}),
     UserModule,
   ],
   controllers: [AppController],
