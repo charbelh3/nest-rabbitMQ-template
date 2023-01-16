@@ -5,6 +5,7 @@ import { UserDto } from 'src/dto/user.dto';
 import { User, UserDocument } from '../../schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { Role } from 'src/security/authorization/roles';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,8 @@ export class UserService {
   }
 
   async signIn(userData: any) {
-    return this.jwtService.sign(userData, {
+    const userDataWithRole = { ...userData, role: Role.Admin };
+    return this.jwtService.sign(userDataWithRole, {
       secret: this.configService.get('secret'),
     });
   }
