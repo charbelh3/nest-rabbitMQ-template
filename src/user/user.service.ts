@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import UserModel, { User } from './entity/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserDto } from 'src/dto/user.dto';
-import { User, UserDocument } from '../../schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Role } from 'src/security/authorization/roles';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectModel(User.name) private userModel: Model<any>,
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {}
 
   async createUser(userData: UserDto) {
+    console.log(userData);
     return this.userModel.create(userData);
   }
 

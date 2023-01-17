@@ -3,4 +3,7 @@ export default () => ({
   database: {
     url: process.env.DB_URL,
   },
+  server: {
+    port: process.env.PORT,
+  },
 });
