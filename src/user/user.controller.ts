@@ -15,6 +15,8 @@ export class UserController {
     return this.userService.createUser(userData);
   }
 
+  @Roles(Role.Merchant, Role.Payer)
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Get('')
   async getUsers() {
     return this.userService.getUsers();

@@ -1,5 +1,7 @@
 import { Injectable, ExecutionContext, CanActivate } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common/exceptions';
 import { Reflector } from '@nestjs/core';
+import errors from 'src/config/errors';
 import { Role, ROLES_KEY } from './roles';
 
 @Injectable()
@@ -16,6 +18,8 @@ export class AuthorizationGuard implements CanActivate {
 
     const { user } = context.switchToHttp().getRequest();
 
-    return requiredRoles.includes(user.role);
+    if (requiredRoles.includes(user.role)) {
+      return true;
+    } else throw new ForbiddenException(errors.forbidden);
   }
 }

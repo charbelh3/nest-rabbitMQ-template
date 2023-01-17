@@ -6,4 +6,7 @@ export default () => ({
   server: {
     port: process.env.PORT,
   },
+  token: {
+    secret: process.env.SECRET,
+  },
 });

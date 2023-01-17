@@ -5,6 +5,18 @@ const errors = {
     error: 'Bad Request',
     code: 'BAD_REQUEST',
   },
+  unauthorized: {
+    statusCode: 401,
+    message: 'Unauthorized Access',
+    error: 'Unauthorized Access',
+    code: 'UNAUTHORIZED',
+  },
+  forbidden: {
+    statusCode: 403,
+    message: 'Permission denied',
+    error: 'Forbidden',
+    code: 'FORBIDDEN',
+  },
 };
 
 export default errors;

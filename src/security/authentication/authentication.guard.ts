@@ -10,9 +10,8 @@ export class AuthenticationGuard implements CanActivate {
     const token = request.headers.authorization?.split(' ')[1];
     if (!token) return false;
 
-    const userData = this.authService.authenticate(token);
+    const userData = this.authService.verifyToken(token);
     request.user = userData;
-    return Boolean(userData);
+    return true;
   }
 }
-
