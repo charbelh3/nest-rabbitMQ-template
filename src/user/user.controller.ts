@@ -17,7 +17,7 @@ export class UserController {
 
   @Post('')
   @UsePipes(new JoiValidationPipe(schema.createUser))
-  async createUser(@Body() user: any): Promise<any> {
+  async createUser(@Body() user: UserDto): Promise<any> {
     return this.userService.createUser(user);
   }
 
