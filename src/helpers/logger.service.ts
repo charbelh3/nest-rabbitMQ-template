@@ -8,7 +8,7 @@ export class CustomWinstonLogger implements LoggerService {
   private logger: winston.Logger;
   private logTransform = (info: winston.Logform.TransformableInfo): string => {
     const { level, message, timestamp, correlationId } = info;
-    return `${timestamp} -${correlationId}- ${level}: ${message}`;
+    return `${timestamp} -${correlationId || ''}- ${level}: ${message}`;
   };
 
   constructor(private configService: ConfigService) {
