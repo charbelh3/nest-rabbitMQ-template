@@ -1,11 +1,8 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import config from './config/config';
 import { GlobalModule } from './global.module';
-import { CustomWinstonLogger } from './helpers/logger.service';
 import { LoggingMiddlewareService } from './middlewares/logging-middleware.service';
 
 @Module({
