@@ -1,11 +1,8 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import config from './config/config';
-import { CustomWinstonLogger } from './helpers/logger.service';
+import { GlobalModule } from './global.module';
 import { LoggingMiddlewareService } from './middlewares/logging-middleware.service';
 
 @Module({
@@ -22,10 +19,10 @@ import { LoggingMiddlewareService } from './middlewares/logging-middleware.servi
       }),
       inject: [ConfigService],
     }),
-    UserModule,
+    GlobalModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, LoggingMiddlewareService, CustomWinstonLogger],
+  controllers: [],
+  providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

@@ -5,6 +5,12 @@ const errors = {
     error: 'Bad Request',
     code: 'BAD_REQUEST',
   },
+  timeoutError: {
+    statusCode: 408,
+    message: 'Request Timeout',
+    error: 'Request Timeout',
+    code: 'TIMEOUT',
+  },
 };
 
 export default errors;
