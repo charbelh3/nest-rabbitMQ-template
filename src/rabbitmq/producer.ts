@@ -19,6 +19,7 @@ export default class Producer {
     data,
     queueName,
     correlationId,
+    headers = {},
     waitForResponse = true,
     needToAssertQueue = false,
   ) {
@@ -28,6 +29,7 @@ export default class Producer {
     this.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
       correlationId: correlationId,
       replyTo: this.replyQueue,
+      headers,
       expiration: this.config.get('rabbitMQ.messageExpiration'),
     });
 

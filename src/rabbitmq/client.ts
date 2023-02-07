@@ -74,7 +74,8 @@ export default class RabbitMQClient {
     data,
     queueName: string,
     correlationId: string,
-    waitForResponse: boolean,
+    headers = {},
+    waitForResponse = false,
     needToAssertQueue = false,
   ) {
     if (!this.connection || !this.producerChannel) {
@@ -85,6 +86,7 @@ export default class RabbitMQClient {
       data,
       queueName,
       correlationId,
+      headers,
       waitForResponse,
       needToAssertQueue,
     );
