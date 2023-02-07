@@ -19,9 +19,9 @@ export default class Producer {
     data,
     queueName,
     correlationId,
-    headers = {},
     waitForResponse = true,
     needToAssertQueue = false,
+    headers = {},
   ) {
     //Make sure the consumer's queue exists before sending
     if (needToAssertQueue) await this.channel.assertQueue(queueName);
