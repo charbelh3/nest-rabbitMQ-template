@@ -22,16 +22,26 @@ export default class Producer {
     waitForResponse = true,
     needToAssertQueue = false,
     headers = {},
+    hasExpirationTime = true,
   ) {
     //Make sure the consumer's queue exists before sending
     if (needToAssertQueue) await this.channel.assertQueue(queueName);
 
-    this.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
+    let rabbitOptions: any = {
       correlationId: correlationId,
       replyTo: this.replyQueue,
       headers,
-      expiration: this.config.get('rabbitMQ.messageExpiration'),
-    });
+    };
+
+    if (hasExpirationTime) {
+      rabbitOptions.expiration = this.config.get('rabbitMQ.messageExpiration');
+    }
+
+    this.channel.sendToQueue(
+      queueName,
+      Buffer.from(JSON.stringify(data)),
+      rabbitOptions,
+    );
 
     //Receive the response from the event emitted on the same correlation id
     if (waitForResponse) {

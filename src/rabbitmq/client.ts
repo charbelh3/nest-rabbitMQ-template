@@ -77,6 +77,7 @@ export default class RabbitMQClient {
     waitForResponse = false,
     needToAssertQueue = false,
     headers = {},
+    hasExpirationTime = true,
   ) {
     if (!this.connection || !this.producerChannel) {
       await this.initialize();
@@ -89,6 +90,7 @@ export default class RabbitMQClient {
       waitForResponse,
       needToAssertQueue,
       headers,
+      hasExpirationTime,
     );
   }
 
