@@ -16,6 +16,12 @@ const errors = {
     message: 'Permission denied',
     error: 'Forbidden',
     code: 'FORBIDDEN',
+    timeoutError: {
+      statusCode: 408,
+      message: 'Request Timeout',
+      error: 'Request Timeout',
+      code: 'TIMEOUT',
+    },
   },
 };
 

@@ -2,12 +2,11 @@ import { Module, NestModule, MiddlewareConsumer, Global } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt/dist';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import config from './config/config';
 import { CustomWinstonLogger } from './helpers/logger.service';
+import config from './config/config';
 import { LoggingMiddlewareService } from './middlewares/logging-middleware.service';
+import { GlobalModule } from './global.module';
 
 @Module({
   imports: [
@@ -25,9 +24,10 @@ import { LoggingMiddlewareService } from './middlewares/logging-middleware.servi
     }),
     JwtModule.register({}),
     UserModule,
+    GlobalModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, LoggingMiddlewareService, CustomWinstonLogger],
+  controllers: [],
+  providers: [LoggingMiddlewareService, CustomWinstonLogger],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
